@@ -83,3 +83,4 @@ generally made searx better:
 - Joseph Nuthalapati @josephkiranbabu
 - @maiki
 - Richard Didier @zeph33
+- Václav Zouzalík @Venca24
