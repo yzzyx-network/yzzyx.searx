@@ -34,4 +34,5 @@ class StandaloneSearx(SearxTestCase):
 
     def test_main_basic_args(self):
         ss = get_standalone_searx_module()
-        ss.main(ss.parse_argument(['red box']))
+        res = ss.main(ss.parse_argument(['red box']))
+        self.assertTrue(res)
