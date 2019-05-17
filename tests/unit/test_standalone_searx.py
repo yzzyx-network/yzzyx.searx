@@ -54,7 +54,7 @@ class StandaloneSearx(SearxTestCase):
         if is_travis:
             for idx, engines in enumerate(settings['engines']):
                 if 'shortcut' in engines:
-                    engines['shortcut'] = ''
+                    engines['shortcut'] = None
                     settings['engines'][idx] = engines
             res = ss.main(ss.parse_argument(['red box']), settings['engines'])
         else:
