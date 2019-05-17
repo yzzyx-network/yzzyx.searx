@@ -23,7 +23,7 @@ class StandaloneSearx(SearxTestCase):
     def test_parse_argument_basic_args(self):
         ss = get_standalone_searx_module()
         query = 'red box'
-        exp_dict =  {
+        exp_dict = {
             'query': query, 'category': 'general', 'lang': 'all', 'pageno': 1, 'safesearch': '0', 'timerange': None}
         args = ['standalone_searx', query]
         with patch.object(sys, 'argv', args):

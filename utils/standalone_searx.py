@@ -52,16 +52,18 @@ def main(args: argparse.Namespace)->str:
     except AttributeError:
         category = args.category
     form = {
-        "q":args.query,
-        "categories":category,
-        "pageno":str(args.pageno),
-        "language":args.lang,
-        "time_range":args.timerange
+        "q": args.query,
+        "categories": category,
+        "pageno": str(args.pageno),
+        "language": args.lang,
+        "time_range": args.timerange
     }
     if PY3:
-        preferences = searx.preferences.Preferences(['oscar'], list(searx.engines.categories.keys()), searx.engines.engines, [])
+        preferences = searx.preferences.Preferences(
+            ['oscar'], list(searx.engines.categories.keys()), searx.engines.engines, [])
     else:
-        preferences = searx.preferences.Preferences(['oscar'], searx.engines.categories.keys(), searx.engines.engines, [])
+        preferences = searx.preferences.Preferences(
+            ['oscar'], searx.engines.categories.keys(), searx.engines.engines, [])
     preferences.key_value_settings['safesearch'].parse(args.safesearch)
 
     search_query = searx.search.get_search_query_from_webapp(preferences, form)
@@ -85,7 +87,7 @@ def main(args: argparse.Namespace)->str:
             return obj.decode('utf8')
         if isinstance(obj, set):
             return list(obj)
-        raise TypeError ("Type ({}) not serializable".format(type(obj)))
+        raise TypeError("Type ({}) not serializable".format(type(obj)))
 
     result_container_json = {
         "search": {
@@ -119,7 +121,7 @@ def parse_argument(args: Optional[List[str]] = None)-> Union[None, argparse.Name
                         choices=searx.engines.categories.keys(),
                         default='general',
                         help='Search category')
-    parser.add_argument('--lang', type=str, nargs='?',default='all',
+    parser.add_argument('--lang', type=str, nargs='?', default='all',
                         help='Search language')
     parser.add_argument('--pageno', type=int, nargs='?', default=1,
                         help='Page number starting from 1')
