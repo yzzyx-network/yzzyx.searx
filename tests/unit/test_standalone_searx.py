@@ -4,7 +4,7 @@ import os
 import sys
 
 from searx.testing import SearxTestCase
-import searx.engines
+from searx import settings
 
 
 if sys.version_info[0] == 3:
@@ -51,13 +51,12 @@ class StandaloneSearx(SearxTestCase):
     def test_main_basic_args(self):
         ss = get_standalone_searx_module()
         is_travis = 'TRAVIS' in os.environ
-        if is_travis:
-            s_engines = searx.engines
-            for idx, engines in enumerate(s_engines.settings['engines']):
+        if is_travis or True:
+            for idx, engines in enumerate(settings['engines']):
                 if engines['shortcut'] == 'apkm':
-                    engines['shortcut'] = None
-                    s_engines.settings['engines'][idx] = engines
-            res = ss.main(ss.parse_argument(['red box']), engines)
+                    engines['shortcut'] = ''
+                    settings['engines'][idx] = engines
+            res = ss.main(ss.parse_argument(['red box']), settings['engines'])
         else:
             res = ss.main(ss.parse_argument(['red box']))
         self.assertTrue(res)
