@@ -43,7 +43,8 @@ else:
     PY3 = False
 
 
-def main(args: argparse.Namespace, engines: List[Any] = settings['engines'])->str:
+def main(args, engines=settings['engines']):
+    # type: (argparse.Namespace, List[Any]) -> str
     searx.engines.initialize_engines(engines)
 
     # search results for the query
@@ -112,7 +113,8 @@ def main(args: argparse.Namespace, engines: List[Any] = settings['engines'])->st
     return dump_result
 
 
-def parse_argument(args: Optional[List[str]] = None)-> Union[None, argparse.Namespace]:
+def parse_argument(args=None):
+    # type: : (Optional[List[str]]) -> Union[None, argparse.Namespace]
     # command line parsing
     parser = argparse.ArgumentParser(description='Standalone searx.')
     parser.add_argument('query', type=str,
