@@ -120,10 +120,12 @@ def main(args, engines=settings['engines']):
     return dump_result
 
 
-def parse_argument(args=None):
-    # type: (Optional[List[str]]) -> Union[None, argparse.Namespace]
+def parse_argument(args=None, engines=None):
+    # type: (Optional[List[str]], Optional[Union[List[Any], None]]) -> Union[None, argparse.Namespace]
     # command line parsing
     # Note category_choices only give 'general' if engine is not initialized
+    if engines:
+        searx.engines.initialize_engines(engines)
     category_choices = list(searx.engines.categories.keys())
     parser = argparse.ArgumentParser(description='Standalone searx.')
     parser.add_argument('query', type=str,
