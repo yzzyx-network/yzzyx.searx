@@ -56,7 +56,7 @@ class StandaloneSearx(SearxTestCase):
             for idx, engines in enumerate(s_engines.settings['engines']):
                 if engines['shortcut'] == 'apkm':
                     engines['shortcut'] = None
-                    s_engines.settings['engines'][idx] == engines
+                    s_engines.settings['engines'][idx] = engines
             res = ss.main(ss.parse_argument(['red box']), engines)
         else:
             res = ss.main(ss.parse_argument(['red box']))
