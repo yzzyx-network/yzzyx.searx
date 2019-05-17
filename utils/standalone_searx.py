@@ -24,7 +24,7 @@ along with searx. If not, see < http://www.gnu.org/licenses/ >.
 
 # initialization
 from json import dumps
-from typing import List, Optional, Union
+from typing import Any, List, Optional, Union
 import argparse
 import codecs
 import sys
@@ -43,8 +43,8 @@ else:
     PY3 = False
 
 
-def main(args: argparse.Namespace)->str:
-    searx.engines.initialize_engines(settings['engines'])
+def main(args: argparse.Namespace, engines: List[Any] = settings['engines'])->str:
+    searx.engines.initialize_engines(engines)
 
     # search results for the query
     try:
