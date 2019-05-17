@@ -7,11 +7,25 @@ from searx.testing import SearxTestCase
 import searx.engines
 
 
+if sys.version_info[0] == 3:
+    PY3 = True
+else:
+    PY3 = False
+
+
 def get_standalone_searx_module():
-    import importlib.util
-    spec = importlib.util.spec_from_file_location("utils.standalone_searx", "utils/standalone_searx.py")
-    ss = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(ss)
+    module_name = 'utils.standalone_searx'
+    filename = 'utils/standalone_searx.py'
+    if PY3:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(module_name, filename)
+        ss = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(ss)
+    else:
+        import imp
+        module = imp.load_source(module_name.split('.')[-1], filename)
+        return module
+
     return ss
 
 
