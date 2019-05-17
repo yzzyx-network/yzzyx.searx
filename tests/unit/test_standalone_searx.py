@@ -51,12 +51,5 @@ class StandaloneSearx(SearxTestCase):
     def test_main_basic_args(self):
         ss = get_standalone_searx_module()
         is_travis = 'TRAVIS' in os.environ
-        if is_travis:
-            for idx, engines in enumerate(settings['engines']):
-                if 'shortcut' in engines:
-                    engines['shortcut'] = ''
-                    settings['engines'][idx] = engines
-            res = ss.main(ss.parse_argument(['red box']), settings['engines'])
-        else:
-            res = ss.main(ss.parse_argument(['red box']))
+        res = ss.main(ss.parse_argument(['red box']))
         self.assertTrue(res)
