@@ -24,7 +24,7 @@ along with searx. If not, see < http://www.gnu.org/licenses/ >.
 
 # initialization
 from json import dumps
-from typing import Any, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 import argparse
 import codecs
 import sys
@@ -69,6 +69,13 @@ def get_result(args, engines=settings['engines']):
     preferences.key_value_settings['safesearch'].parse(args.safesearch)
 
     search_query = searx.search.get_search_query_from_webapp(preferences, form)
+    # deduplicate engines
+    new_sq_engines = []  # type: List[Dict[str, Any]]
+    sq_engines = search_query.engines
+    for item in sq_engines:
+        if item not in new_sq_engines:
+            new_sq_engines.append(item)
+    search_query.engines = new_sq_engines
     search = searx.search.Search(search_query)
     result_container = search.search()
     return search_query, result_container
