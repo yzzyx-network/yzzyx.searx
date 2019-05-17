@@ -54,7 +54,7 @@ class StandaloneSearx(SearxTestCase):
         if is_travis:
             s_engines = searx.engines
             for idx, engines in enumerate(s_engines.settings['engines']):
-                if engines['shortcut'] == apkm:
+                if engines['shortcut'] == 'apkm':
                     engines['shortcut'] = None
                     s_engines.settings['engines'][idx] == engines
             res = ss.main(ss.parse_argument(['red box'], engines))
