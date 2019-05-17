@@ -24,7 +24,7 @@ along with searx. If not, see < http://www.gnu.org/licenses/ >.
 
 # initialization
 from json import dumps
-from typing import Any, List, Optional, Union
+from typing import Any, List, Optional, Tuple, Union
 import argparse
 import codecs
 import sys
@@ -43,8 +43,8 @@ else:
     PY3 = False
 
 
-def main(args, engines=settings['engines']):
-    # type: (argparse.Namespace, List[Any]) -> str
+def get_result(args, engines=settings['engines']):
+    # type: (argparse.Namespace, List[Any]) -> Tuple[searx.query.SearchQuery, searx.results.ResultContainer]
     searx.engines.initialize_engines(engines)
 
     # search results for the query
@@ -70,6 +70,12 @@ def main(args, engines=settings['engines']):
     search_query = searx.search.get_search_query_from_webapp(preferences, form)
     search = searx.search.Search(search_query)
     result_container = search.search()
+    return search_query, result_container
+
+
+def main(args, engines=settings['engines']):
+    # type: (argparse.Namespace, List[Any]) -> str
+    search_query, result_container = get_result(args, engines)
 
     # output
     from datetime import datetime
