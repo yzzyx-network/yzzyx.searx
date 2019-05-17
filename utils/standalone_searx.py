@@ -120,13 +120,15 @@ def main(args, engines=settings['engines']):
 
 
 def parse_argument(args=None):
-    # type: : (Optional[List[str]]) -> Union[None, argparse.Namespace]
+    # type: (Optional[List[str]]) -> Union[None, argparse.Namespace]
     # command line parsing
+    # Note category_choices only give 'general' if engine is not initialized
+    category_choices = list(searx.engines.categories.keys())
     parser = argparse.ArgumentParser(description='Standalone searx.')
     parser.add_argument('query', type=str,
                         help='Text query')
     parser.add_argument('--category', type=str, nargs='?',
-                        choices=searx.engines.categories.keys(),
+                        choices=category_choices,
                         default='general',
                         help='Search category')
     parser.add_argument('--lang', type=str, nargs='?', default='all',
@@ -144,6 +146,7 @@ def parse_argument(args=None):
     return parsed_args
 
 if __name__ == '__main__':
+    searx.engines.initialize_engines(settings['engines'])
     args = parse_argument()
     if args:
         res = main(args)
