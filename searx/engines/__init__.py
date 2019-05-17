@@ -139,7 +139,6 @@ def load_engine(engine_data):
     else:
         if engine.shortcut in engine_shortcuts:
             logger.error('Engine config error: ambigious shortcut: {0}'.format(engine.shortcut))
-            logger.error('engine_shortcuts: {0}'.format(engine_shortcuts))
             sys.exit(1)
 
         engine_shortcuts[engine.shortcut] = engine.name
