@@ -44,8 +44,9 @@ else:
 
 
 def get_result(args, engines=settings['engines']):
-    # type: (argparse.Namespace, List[Any]) -> Tuple[searx.query.SearchQuery, searx.results.ResultContainer]
-    searx.engines.initialize_engines(engines)
+    # type: (argparse.Namespace, Union[List[Any], None]) -> Tuple[searx.query.SearchQuery, searx.results.ResultContainer]
+    if engines:
+        searx.engines.initialize_engines(engines)
 
     # search results for the query
     try:
@@ -74,7 +75,7 @@ def get_result(args, engines=settings['engines']):
 
 
 def main(args, engines=settings['engines']):
-    # type: (argparse.Namespace, List[Any]) -> str
+    # type: (argparse.Namespace, Union[List[Any], None]) -> str
     search_query, result_container = get_result(args, engines)
 
     # output
@@ -149,7 +150,7 @@ if __name__ == '__main__':
     searx.engines.initialize_engines(settings['engines'])
     args = parse_argument()
     if args:
-        res = main(args)
+        res = main(args, None)
         if PY3:
             sys.stdout.write(res)
         else:
