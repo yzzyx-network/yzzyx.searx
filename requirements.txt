@@ -9,4 +9,4 @@ pyopenssl==19.0.0
 python-dateutil==2.7.5
 pyyaml==4.2b1
 requests[socks]==2.21.0
-typing=3.6.6
+typing==3.6.6
