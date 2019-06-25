@@ -43,11 +43,8 @@ else:
     PY3 = False
 
 
-def get_result(args, engines=settings['engines']):
-    # type: (argparse.Namespace, Union[List[Any], None]) -> Tuple[searx.query.SearchQuery, searx.results.ResultContainer]
-    if engines:
-        searx.engines.initialize_engines(engines)
-
+def get_search_query(args, engines=settings['engines']):
+    # type: (argparse.Namespace, Union[List[Any], None]) -> searx.query.SearchQuery
     # search results for the query
     try:
         category = args.category.decode('utf-8')
@@ -76,6 +73,15 @@ def get_result(args, engines=settings['engines']):
         if item not in new_sq_engines:
             new_sq_engines.append(item)
     search_query.engines = new_sq_engines
+    return search_query
+
+
+def get_result(args=None, engines=settings['engines'], search_query=None):
+    # type: (argparse.Namespace, Union[List[Any], None], Union[searx.query.SearchQuery, None]) -> Tuple[searx.query.SearchQuery, searx.results.ResultContainer]  # NOQA
+    if args is None and search_query is None:
+        raise ValueError('args or search_query parameter required')
+    if search_query is None:
+        search_query = get_search_query(args, engines)  # type: ignore
     search = searx.search.Search(search_query)
     result_container = search.search()
     return search_query, result_container
