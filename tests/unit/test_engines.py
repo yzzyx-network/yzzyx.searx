@@ -21,6 +21,8 @@ from searx.testing import SearxTestCase
 
 class EngineTest(SearxTestCase):
 
+    maxDiff = None
+
     def test_response(self):
         if not(pathlib and importlib):
             return
