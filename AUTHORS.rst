@@ -85,6 +85,7 @@ generally made searx better:
 - Joseph Nuthalapati @josephkiranbabu
 - @maiki
 - Richard Didier @zeph33
+ HEAD
 - Michael Vieria @Themimitoof
 - Richard Nespithal @rndevfx
 - Stanislas @angristan
@@ -123,3 +124,5 @@ generally made searx better:
 - Vipul @finn0
 - @CaffeinatedTech
 - Robin Schneider @ypid
+- Václav Zouzalík @Venca24
+ dee04b2a21e75244ac42af6d163b1161b8b727ad
