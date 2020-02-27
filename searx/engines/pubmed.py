@@ -1,7 +1,6 @@
-#!/usr/bin/env python
-
 """
  PubMed (Scholar publications)
+
  @website     https://www.ncbi.nlm.nih.gov/pubmed/
  @provide-api yes (https://www.ncbi.nlm.nih.gov/home/develop/api/)
  @using-api   yes
